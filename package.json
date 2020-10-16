@@ -1,0 +1,11 @@
+{
+  "name": "typescript_web_framework",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:david262929/typescript_web_framework.git",
+  "author": "David <davidghazaryan2000@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
