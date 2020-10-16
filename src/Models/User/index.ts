@@ -25,7 +25,7 @@ export class User {
 
     trigger ( eventName: string ): void {
         const callbacks = this.events[eventName] || []
-        if( callbacks.length ) {
+        if( !callbacks.length ) {
             return;
         }
         callbacks.forEach( (callback: Callback): void => callback())
