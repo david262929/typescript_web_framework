@@ -5,6 +5,9 @@
   "repository": "git@github.com:david262929/typescript_web_framework.git",
   "author": "David <davidghazaryan2000@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev" : "parcel index.html"
+  },
   "dependencies": {
     "parcel-bundler": "^1.12.4"
   },
