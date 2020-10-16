@@ -1,8 +1,7 @@
+import { ID } from "../../commons/type";
+
 export interface UserProps{
-    name: string,
-    age: number,
-}
-export interface UserPropsNonMandatory{
+    id?: ID,
     name?: string,
     age?: number,
 }
