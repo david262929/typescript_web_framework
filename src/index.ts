@@ -50,12 +50,18 @@
 import { User } from './Models/User';
 import {UserForm} from './Views/UserForm';
 
+const root: HTMLElement | null = document.getElementById('root');
+
+if(!root){
+	throw new Error(`Can't find a root element`);
+}
+
 const userForm = new UserForm(
-		document.getElementById('root'),
-		User.buildUser({
-			name: 'Davo',
-			age: 20,
-		})
+	root,
+	User.buildUser({
+		name: 'Davo',
+		age: 20,
+	})
 )
 
 userForm.render();
