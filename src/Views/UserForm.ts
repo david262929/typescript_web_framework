@@ -1,43 +1,15 @@
+import { UserProps } from './../Models/User/types';
 import { User } from '../Models/User';
 import { List, Callback } from './../commons/type';
-export class UserForm{
+import { View } from './View';
 
-  constructor(
-    public parent: Element,
-    public model: User,
-  ){
-    this.bindModel();
-  }
-
-  bindModel(): void {
-    this.model.on('update', () => {
-      this.render()
-    })
-  }
-
-  eventMap(): List<Callback[]>{
+export class UserForm extends View<User, UserProps>{
+  eventsMap(): List< Callback[] | Callback >{
     return {
-      'click:.set-name': [this.onSetNameClick],
-      'click:.set-age': [this.onSetAgeClick],
-      'mouseenter:h1': [this.onHeaderHover],
-    }
-  }
-
-  bindEvents(fragment: DocumentFragment): void {
-    const eventsMap = this.eventMap();
-    for (let eventKey in eventsMap){
-      const [eventName, selector] = eventKey.split(':');
-
-      fragment.querySelectorAll(selector).forEach( (element: HTMLElement) => {
-
-        element.addEventListener(eventName, (...props) => {
-
-          eventsMap[eventKey].forEach( (callback: Callback) => {
-            callback(...props)
-          })
-        })
-      })
-
+      'click:.set-name': this.onSetNameClick,
+      'click:.save-model': this.onSaveModelClick,
+      'click:.set-age': this.onSetAgeClick,
+      'mouseenter:h1': this.onHeaderHover,
     }
   }
 
@@ -46,7 +18,11 @@ export class UserForm{
   }
 
   onSetNameClick= (): void => {
-    const input = this.parent.querySelector('input');
+    const input: HTMLInputElement | null = this.parent.querySelector('input');
+    if(!input){
+      return;
+    }
+
     const name = input.value;
 
     this.model.set({name})
@@ -56,27 +32,21 @@ export class UserForm{
     this.model.setRandomAge();
   }
 
+  onSaveModelClick = (): void => {
+    this.model.save();
+  }
+
   template(): string{
     return `
       <div>
         <h1>User Form</h1>
         <div>User name: ${this.model.get('name')}</div>
         <div>User age: ${this.model.get('age')}</div>
-        <input />
+        <input placeholder="${this.model.get('name')}"/>
         <button class="set-name">Set Name</button>
         <button class="set-age">Set Random Age</button>
+        <button class="save-model">Save Model</button>
       </div> 
     `
-  } 
-
-  render(): any{
-    this.parent.innerHTML = '';
-
-    const templateElement = document.createElement('template');
-    templateElement.innerHTML = this.template();
-    
-    this.bindEvents(templateElement.content); 
-
-    this.parent.append(templateElement.content)
   } 
 }
