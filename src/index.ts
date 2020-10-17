@@ -2,20 +2,24 @@ import {UserProps} from './Models/User/types'
 import {User} from './Models/User'
 
 const userProps: UserProps = { 
-    id: 6,
-    name: 'Anun',
-    age: 100,
+    name: 'Abugaga',
+    age: 1000,
 }
 const user = new User(userProps);
-user.save();
 
-user.events.on('test_test', () => {
-    console.log('test_test test_test');
+user.on('update', () => {
+    console.log(user,'updated2 ----- updated2');
+}).on('save', () => {
+    console.log(user,'save ----- savesavesavesave');
+}).on('error', (error) => {
+    console.error(error);
 });
 
-console.log(user);
+user.set({
+    age: 2000,
+})
 
-user.events.trigger('test_test');
+user.save();
 
 // console.log(user);
 

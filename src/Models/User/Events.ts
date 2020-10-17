@@ -9,11 +9,11 @@ export class Events {
 		this.events[eventName] = callbacks
 	}
 
-	trigger ( eventName: string ): void {
+	trigger ( eventName: string, ...params: any ): void {
 		const callbacks = this.events[eventName] || []
 		if( !callbacks.length ) {
 			return;
 		}
-		callbacks.forEach( (callback: Callback): void => callback())
+		callbacks.forEach( (callback: Callback): void => callback(...params))
 	}
 }

@@ -6,7 +6,7 @@ export interface UserProps{
     age?: number,
 }
 
-export type Callback = () => void
+export type Callback = (...params: any) => void
 
 export interface UserEvents {
     [key: string]: Callback[],

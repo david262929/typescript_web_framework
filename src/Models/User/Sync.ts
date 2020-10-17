@@ -1,20 +1,20 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosPromise, AxiosResponse } from 'axios'
 import { ID, HaseId } from '../../commons/type';
 const baseURL = 'http://localhost:3000';
 
 export class Sync<T extends HaseId> {
-	async fetch (id: ID): Promise<void> {
-		const response: AxiosResponse = await axios.get(`${baseURL}/users/${id}`);
-		return Promise.resolve(response.data)
+
+	fetch (id: ID): Promise<AxiosResponse> {
+		return axios.get(`${baseURL}/users/${id}`)
 	}
 
-	async save (data: T): Promise<void> {
+	save (data: T): Promise<AxiosResponse> {
 		const {id}: HaseId  = data;
 
 		if( id ) {
-			return await axios.put(`${baseURL}/users/${id}`, data);
+			return axios.put(`${baseURL}/users/${id}`, data);
 		}
 
-		return await axios.post(`${baseURL}/users`, data);
-  }
+		return axios.post(`${baseURL}/users`, data);
+	}
 }
