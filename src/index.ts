@@ -33,10 +33,10 @@
 // // user.set({
 // //     age: parseInt( user.get('age') ),
 // // })
-import {Collection} from './Models/User/Collection';
+import { User } from './Models/User';
 
 (async () => {
-    const collection = new Collection();
+    const collection = User.buildUserCollection();
     const models = await collection.fetch();
     console.log(models);
 })()
