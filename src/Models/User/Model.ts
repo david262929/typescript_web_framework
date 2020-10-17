@@ -4,7 +4,16 @@ import { Attributes } from './Attributes';
 import { AxiosResponse } from "axios";
 import { Callback } from "./types";
 
-export class Model<T> {
+export interface ModelType<T> {
+	on(eventName: string, callback: Callback): Model<T>;
+	trigger(eventName: string, ...params): Model<T>;
+	get<K extends keyof T>(propName: K): T[K];
+	set(update: T): Model<T>;
+	fetch(): Promise<Model<T>>;
+	save(): Promise<Model<T>>;
+}
+
+export class Model<T>  {
   constructor(
     private attributes: Attributes<T>,
     private events: Events,
