@@ -2,7 +2,7 @@ import { ApiSync } from './ApiSync';
 import { Events } from './Events';
 import { Attributes } from './Attributes';
 import { AxiosResponse } from "axios";
-import { Callback } from "./types";
+import { Callback } from "../../commons/type";
 
 export interface ModelType<T> {
 	on(eventName: string, callback: Callback): Model<T>;

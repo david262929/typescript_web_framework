@@ -5,9 +5,3 @@ export interface UserProps{
 	name?: string,
 	age?: number,
 }
-
-export type Callback = (...params: any) => void
-
-export interface UserEvents {
-	[key: string]: Callback[],
-}

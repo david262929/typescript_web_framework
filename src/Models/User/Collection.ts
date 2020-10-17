@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { User } from ".";
 import { Events } from "./Events";
-import { Callback, UserProps } from "./types";
+import { UserProps } from "./types";
+import { Callback } from "../../commons/type";
 
 export class Collection<T, K>{
   models: T[] = [];
