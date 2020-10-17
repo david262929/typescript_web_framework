@@ -2,10 +2,12 @@ import {UserProps} from './Models/User/types'
 import {User} from './Models/User'
 
 const userProps: UserProps = { 
-    name: 'Abugaga',
+    id: 1,
+    name: 'Abugaga1',
     age: 1000,
 }
-const user = new User(userProps);
+
+const user = User.buildUser(userProps)
 
 user.on('update', () => {
     console.log(user,'updated2 ----- updated2');

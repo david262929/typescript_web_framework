@@ -1,24 +1,9 @@
 {
   "users": [
     {
-      "name": "Abugaga",
-      "age": 2000,
-      "id": 7
-    },
-    {
-      "name": "Abugaga",
-      "age": 2000,
-      "id": 8
-    },
-    {
-      "name": "Abugaga",
-      "age": 2000,
-      "id": 9
-    },
-    {
-      "name": "Abugaga",
-      "age": 2000,
-      "id": 10
+      "id": 1,
+      "name": "Abugaga1",
+      "age": 2000
     }
   ]
 }
