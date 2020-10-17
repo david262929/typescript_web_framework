@@ -62,4 +62,9 @@ export class Model<T>  {
 			return this.trigger('error', e);
 		}
 	}
+
+	setRandomAge(): void{
+		const age = Math.round(Math.random() * 100);
+		this.set({age});
+	}
 }

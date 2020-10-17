@@ -47,11 +47,15 @@
 // 	'hover:h1': () => {},
 // }
 
-
+import { User } from './Models/User';
 import {UserForm} from './Views/UserForm';
 
 const userForm = new UserForm(
-    document.getElementById('root')
+		document.getElementById('root'),
+		User.buildUser({
+			name: 'Davo',
+			age: 20,
+		})
 )
 
 userForm.render();
