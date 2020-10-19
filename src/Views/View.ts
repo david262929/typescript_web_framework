@@ -3,6 +3,8 @@ import { User } from "./../Models/User";
 import { Callback, List } from "../commons/type";
 
 export abstract class View<T extends Model<K>, K> {
+  regions: List<Element> = {};
+
   constructor(
     public parent: Element,
     public model: T,
@@ -10,8 +12,16 @@ export abstract class View<T extends Model<K>, K> {
     this.bindModel();
   }
 
-  abstract eventsMap(): List< Callback[] | Callback >;
   abstract template(): string;
+
+  regionsMap(): List<string> {
+    return {};
+  };
+
+  eventsMap(): List< Callback[] | Callback > {
+    return {};
+  };
+
 
   bindModel(): void {
     this.model.on('update', () => {
@@ -44,13 +54,31 @@ export abstract class View<T extends Model<K>, K> {
     }
   }
 
-  render(): any{
-    this.parent.innerHTML = '';
+  mapRegions(fragment: DocumentFragment): void {
+    const regionsMap = this.regionsMap(); 
+    Object.keys(regionsMap).forEach( (key: string): void => {
+      const selector = regionsMap[key];
+      const element = fragment.querySelector(selector);
+      if(!element){
+        return;
+      }
+      this.regions[key] = element
+    });
 
-    const templateElement = document.createElement('template');
-    templateElement.innerHTML = this.template();
+  }
+
+  onRender(): void {}
+
+  render(): any{
+    this.parent.innerHTML = ''
+
+    const templateElement = document.createElement('template')
+    templateElement.innerHTML = this.template()
     
-    this.bindEvents(templateElement.content); 
+    this.bindEvents(templateElement.content) 
+    this.mapRegions(templateElement.content)
+
+    this.onRender()
 
     this.parent.append(templateElement.content)
   } 
