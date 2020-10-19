@@ -18,18 +18,20 @@ export class Collection<T, K>{
 		return this;
 	}
 
-	trigger(eventName: string, ...params): Collection<T, K>{
+	trigger(eventName: string, ...params: any[]): Collection<T, K>{
 		this.events.trigger( eventName, ...params );
 		return this;
   }
   
-  async fetch() {
+  async fetch(): Promise<T[]> {
     const {data} = await axios.get(`${this.rootUrl}/users`);
     data.forEach(
       (item: K) => this.models.push(
         this.deserialize(item)
       )
     )
+    console.log(this);
+    this.trigger('change')
     return this.models;
   }
 
